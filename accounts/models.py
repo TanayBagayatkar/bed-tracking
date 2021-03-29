@@ -21,7 +21,11 @@ class HospitalAdmin(models.Model):
         related_name='hospital_admin_profile', 
         on_delete=models.CASCADE,
     )
-    hospital = models.ForeignKey(to=Hospital, on_delete=models.CASCADE)
+    hospital = models.ForeignKey(
+        to=Hospital, 
+        on_delete=models.CASCADE, 
+        related_name='admins'
+    )
 
     def __str__(self):
         return self.hospital.name + ': ' + str(self.user)
