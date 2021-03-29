@@ -1,5 +1,4 @@
 import React from 'react';
-import data from '../data/data.json';
 function HospitalWindow({match}) {
     
     // const product = data.product.find((x) => Number(x._id)  === Number(props.match.params.id));

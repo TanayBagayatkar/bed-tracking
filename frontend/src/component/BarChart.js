@@ -1,5 +1,4 @@
 import React from 'react';
-// import data from '../data/data.json';
 import * as hospi from '../data/data.json';
 import { Doughnut} from 'react-chartjs-2';
 function BarChart(props) {
@@ -9,20 +8,20 @@ function BarChart(props) {
     hospi.hospitals.map(hos=>hos.properties.total_beds).forEach(cap=>{
         total_sum+=parseFloat(cap);
     });
-    console.log("total:", total_sum)
+    // console.log("total:", total_sum)
 
     var occupied_sum=0;
     hospi.hospitals.map(hos=>hos.properties.occupied_beds).forEach(cap=>{
         occupied_sum+=parseFloat(cap);
     });
-    console.log("occ: ",occupied_sum)
+    // console.log("occ: ",occupied_sum)
 
     var vacant_sum=0;
     hospi.hospitals.map(hos=>hos.properties.vacant_beds).forEach(cap=>{
         vacant_sum+=parseFloat(cap);
     });
 
-    console.log("vaca: ",vacant_sum)
+    // console.log("vaca: ",vacant_sum)
     const data = {
         labels: [
           'Occupied',
