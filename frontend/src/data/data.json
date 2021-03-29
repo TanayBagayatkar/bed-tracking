@@ -1,0 +1,161 @@
+{
+    "hospitals":[
+        {
+            "properties": 
+            {
+                "_id":"1",
+                "name":"Lion Karter Hospital",
+                "category":"Mutli Specialist",
+                "total_beds":"540",
+                "occupied_beds":"10",
+                "vacant_beds":"98",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"25-03-21 12:00:17",
+                "src":"/hospital/1"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.123785792799563, 72.84065369431706
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"2",
+                "name":"khubchandani Hospital",
+                "category":"Mutli Specialist",
+                "total_beds":"540",
+                "occupied_beds":"10",
+                "vacant_beds":"98",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"25-03-21 8:18:12",
+                "src":"/hospital/2"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.119376250468637, 72.83629778697075
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"3",
+                "name":"Bhardawadi Maternity Home",
+                "category":"Mutli Specialist",
+                "total_beds":"20",
+                "occupied_beds":"10",
+                "vacant_beds":"10",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"22-03-21 18:45:50",
+                "src":"/hospital/3"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.126669671188296, 72.84309986897726
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"4",
+                "name":"Shree CHS",
+                "category":"Mutli Specialist",
+                "total_beds":"45",
+                "occupied_beds":"10",
+                "vacant_beds":"20",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"25-03-21 7:25:00",
+                "src":"/hospital/4"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.12648214460392, 72.83993486240367
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"5",
+                "name":"Bellevue Mutlispeciality",
+                "category":"Mutli Specialist",
+                "total_beds":"25",
+                "occupied_beds":"10",
+                "vacant_beds":"5",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"25-03-21 8:15:50",
+                "src":"/hospital/5"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.12936344180672, 72.8321296343213
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"6",
+                "name":"Seven Hills Hospital",
+                "category":"Mutli Specialist",
+                "total_beds":"25",
+                "occupied_beds":"10",
+                "vacant_beds":"50",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"22-03-21 9:18:10",
+                "src":"/hospital/6"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.119181113047816, 72.87826362761746
+                ]
+                }
+        },
+        {
+            "properties": 
+            {
+                "_id":"7",
+                "name":"Hajari Hospital",
+                "category":"Mutli Specialist",
+                "total_beds":"20",
+                "occupied_beds":"10",
+                "vacant_beds":"5",
+                "rating":"4.5",
+                "contact":"123456780",
+                "location":"google location",
+                "timestamp":"25-03-21 11:00:02",
+                "src":"/hospital/7"
+            },
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    19.129780733041486, 72.85296666795541
+                ]
+                }
+        }
+            
+        
+        
+    ]
+}
