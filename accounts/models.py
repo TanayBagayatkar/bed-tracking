@@ -9,6 +9,8 @@ class Hospital(models.Model):
     locality = models.CharField(max_length=200, blank=True)
     total_bed_capacity = models.IntegerField()
     current_bed_capacity = models.IntegerField()
+    lat = models.CharField(max_length=200)
+    lon = models.CharField(max_length=200)
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
