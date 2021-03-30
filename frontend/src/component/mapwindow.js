@@ -2,7 +2,10 @@ import React, {  useState } from 'react';
 import ReactMapGl, { Marker, Popup } from 'react-map-gl';
 import * as hospi from '../data/data.json';
 
-
+import Button from "react-bootstrap/Button";
+import Badge from 'react-bootstrap/Badge'
+import {  Card, ListGroup } from 'react-bootstrap';
+import {Telephone} from "react-bootstrap-icons";
   
 function MapWindow(props) {
     const [viewport, setViewport] = useState({
@@ -15,12 +18,6 @@ function MapWindow(props) {
     
     const onMapLoad = (map) => { 
     
-        
-        // map.addControl(new NavigationControl(),'bottom-right');
-        // map.addControl(new GeolocateControl());
-        
-        
-        
         navigator.geolocation.getCurrentPosition(successLocation, errroLocation, {enableHighAccuracy:true});
 
     };
@@ -41,7 +38,7 @@ function MapWindow(props) {
 
     const apik ="pk.eyJ1IjoidGFuYXliYWdheWF0a2FyIiwiYSI6ImNrbWVyazA1ODJ4eGUyb3AxbGl6eTdiODcifQ.xIeXNH630rWCTM_0u1CFHQ";
     return (
-        // <div>
+        
         <div className="map-data">
             
             <ReactMapGl {...viewport} mapboxApiAccessToken={apik}
@@ -50,7 +47,6 @@ function MapWindow(props) {
             onViewportChange={viewport=>{
                 setViewport(viewport);
             }}
-            // ref={ map => useRef() = map }
             onLoad={onMapLoad}
             
             >
@@ -75,7 +71,8 @@ function MapWindow(props) {
                    onClose={()=>{
                        setSelectedHospi(null);
                    }}>
-                       <div className="">
+                       {/* Old view */}
+                       {/* <div className="">
                            <div className="sidebar">
                            <h4>{selectedHospi.properties.name}</h4>
                            </div>
@@ -88,7 +85,24 @@ function MapWindow(props) {
                           Last updated: {selectedHospi.properties.timestamp}
                           </div>
 
-                       </div>
+                       </div> */}
+
+                       {/* New View: */}
+                       <Card>
+                        <Card.Header style={{ overflow: "hidden"}}>
+                            <h4>{selectedHospi.properties.name}<Button variant="outline-primary" style={{right:"0", padding:"5px", float:"right"}}><a href={'tel:'+{...selectedHospi.properties.contact}}><Telephone /></a></Button></h4>
+                            
+                        </Card.Header>
+                        
+                        <ListGroup.Item variant="danger" style={{ fontWeight:"600", color:"#333333",textAlign:"center",fontSize:"large"}}> Last updated: <Badge variant="danger">{selectedHospi.properties.timestamp}</Badge></ListGroup.Item>
+                        <ListGroup  horizontal variant="primary">
+                            <ListGroup.Item variant="warning" style={{ fontWeight:"600",textAlign:"center",fontSize:"large"}}>Occupied Beds: <Badge variant="warning">{selectedHospi.properties.occupied_beds}</Badge></ListGroup.Item>
+                            <ListGroup.Item variant="secondary" style={{ fontWeight:"600",textAlign:"center",fontSize:"large"}}>Special Beds: <Badge variant="secondary">{selectedHospi.properties.occupied_beds}</Badge></ListGroup.Item>
+                            <ListGroup.Item variant="success" style={{ fontWeight:"600",textAlign:"center",fontSize:"large"}}>Vacant Beds: <Badge variant="success">{selectedHospi.properties.vacant_beds}</Badge></ListGroup.Item>
+                        </ListGroup>
+                        <ListGroup.Item variant="primary" style={{fontWeight:"600",textAlign:"center",fontSize:"large"}}>Total Beds: <Badge variant="primary">{selectedHospi.properties.total_beds}</Badge></ListGroup.Item>
+                       
+                        </Card>
                    </Popup>
                ):null}
                
@@ -96,7 +110,7 @@ function MapWindow(props) {
             
         </div>
         
-        // </div>
+    
     );
 }
 

@@ -152,7 +152,8 @@ cursor: pointer;
   background-color:rgba(235, 19, 19, 0.89);
   color: white;
   align-items: flex-end;
-  padding: 8px;
+  padding: 0;
+  margin:0;
   font-weight: bold;
 }
 .pie{
