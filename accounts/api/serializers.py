@@ -105,4 +105,6 @@ class HospitalDetailSerializer(serializers.ModelSerializer):
             'current_bed_capacity',
             'last_updated',
             'speciality_beds',
+            'lat',
+            'lon'
         ]

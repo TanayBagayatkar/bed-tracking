@@ -4,6 +4,9 @@ from rest_framework.views import APIView
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
+from django.http import JsonResponse
+import json
+
 from knox.auth import TokenAuthentication
 from knox.models import AuthToken
 
@@ -60,5 +63,6 @@ class HospitalDetailAPIView(generics.RetrieveAPIView):
     serializer_class = HospitalDetailSerializer
 
     def get_queryset(self):
+       
         return Hospital.objects.all()
 

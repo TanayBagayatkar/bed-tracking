@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import "../login.css";
 
 function Signin(props) {
   const [email, setEmail] = useState("");
-  
+
   const [password, setPassword] = useState("");
 
   function validateForm() {
@@ -15,7 +15,22 @@ function Signin(props) {
   function handleSubmit(event) {
     event.preventDefault();
   }
-    return (
+
+  function login() {
+    console.log(email, password);
+    fetch("http://127.0.0.1:8000/api/auth/login/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(email),
+    })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+  return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>
         <Form.Group size="lg" controlId="email">
@@ -35,12 +50,19 @@ function Signin(props) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </Form.Group>
-        <Button block size="lg" type="submit" disabled={!validateForm()}>
+        <Button
+          block
+          size="lg"
+          type="submit"
+          disabled={!validateForm()}
+          onClick={login}
+        >
           Login
         </Button>
+        {email},{password}
       </Form>
     </div>
-    );
+  );
 }
 
 export default Signin;

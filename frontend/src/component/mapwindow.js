@@ -1,4 +1,4 @@
-import React, {  useState } from 'react';
+import React, {  useEffect, useState } from 'react';
 import ReactMapGl, { Marker, Popup } from 'react-map-gl';
 import * as hospi from '../data/data.json';
 
@@ -6,6 +6,8 @@ import Button from "react-bootstrap/Button";
 import Badge from 'react-bootstrap/Badge'
 import {  Card, ListGroup } from 'react-bootstrap';
 import {Telephone} from "react-bootstrap-icons";
+
+import axios from "axios";
   
 function MapWindow(props) {
     const [viewport, setViewport] = useState({
@@ -15,42 +17,81 @@ function MapWindow(props) {
         width:"100%",
         height:"100vh"
     });
-    
+    const [selectedHospi, setSelectedHospi] = useState(null);
+
+    // user location
     const onMapLoad = (map) => { 
-    
         navigator.geolocation.getCurrentPosition(successLocation, errroLocation, {enableHighAccuracy:true});
-
+        
     };
+    var lat1, lon2;
 
-   
-
+    function fetchData(id){
+        // console.log(email,password);
+        const d1 =  fetch(`http://127.0.0.1:8000/api/hospitals/${id}`,{
+          method:'GET',
+          headers: {'Content-Type':'application/json'},
+        //   body: JSON.stringify(email)
+        }).then(
+            data=>data.json()
+            
+        )
+        .then(
+          data => {
+            lat1=data.lat;
+            lon2=data.lon;
+          }
+        ).catch(error=>{
+          console.log(error)
+        })
+        }
     const successLocation = (position) => {
         console.log(position);
     };
-
     const errroLocation = (err) => {
         console.log(err.message);
     };
+    // const temp = fetchData(1);
+    console.log(lat1,lon2)
     
-    const [selectedHospi, setSelectedHospi] = useState(null);
 
    
+    // api
+    // const fetchData = (id) =>{
+        // return axios.get(`http://127.0.0.1:8000/api/hospitals/${id}`)
+        // .then(({data})=>{
+        //     console.log(data);
+        //     const hosdata = JSON.stringify(data);
+        //     console.log(hosdata);
+        // })
+        // .catch(err=>{
+        //     console.log(err)
+        // })
+    // }
+    // const [randData, setrandData]= useState('')
+    // useEffect(()=>{
+    //     fetchData()
+    //     .then((randData)=>{
+    //         setrandData(randData || ''); 
+    //     });
+        
+
+    // },[])
 
     const apik ="pk.eyJ1IjoidGFuYXliYWdheWF0a2FyIiwiYSI6ImNrbWVyazA1ODJ4eGUyb3AxbGl6eTdiODcifQ.xIeXNH630rWCTM_0u1CFHQ";
     return (
         
         <div className="map-data">
             
+            {/* <Button onClick={fetchData}>Login</Button> */}
             <ReactMapGl {...viewport} mapboxApiAccessToken={apik}
             mapStyle= 'mapbox://styles/mapbox/light-v10'
-            
             onViewportChange={viewport=>{
                 setViewport(viewport);
             }}
-            onLoad={onMapLoad}
-            
+            onLoad={fetchData(1)}
             >
-                
+               
                {hospi.hospitals.map((loci)=>(
                    <Marker 
                    key={loci.properties._id} 
@@ -64,13 +105,16 @@ function MapWindow(props) {
                        </button>
                    </Marker>
                ))}
+               {/* {hosdata} */}
                {selectedHospi?(
                    <Popup 
+                   
                    latitude={selectedHospi.geometry.coordinates[0]}
                    longitude={selectedHospi.geometry.coordinates[1]}
                    onClose={()=>{
                        setSelectedHospi(null);
-                   }}>
+                   }}
+                   >
                        {/* Old view */}
                        {/* <div className="">
                            <div className="sidebar">
@@ -88,6 +132,8 @@ function MapWindow(props) {
                        </div> */}
 
                        {/* New View: */}
+                       <br/>
+                      
                        <Card>
                         <Card.Header style={{ overflow: "hidden"}}>
                             <h4>{selectedHospi.properties.name}<Button variant="outline-primary" style={{right:"0", padding:"5px", float:"right"}}><a href={'tel:'+{...selectedHospi.properties.contact}}><Telephone /></a></Button></h4>

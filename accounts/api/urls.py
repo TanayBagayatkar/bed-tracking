@@ -2,7 +2,7 @@ from accounts.models import Hospital
 from django.urls import path, include
 
 from knox.views import LogoutView
-
+# from . import views
 from accounts.api.views import (
     HospitalAdminLoginAPIView, 
     HospitalBedInfoUpdateAPIView, 
@@ -29,4 +29,7 @@ urlpatterns = [
         name='hospital_detail'
     ),
     path('', include('knox.urls')),
+    # path('json',view.json, name='json')
+    # path('json',view.json, name='json')
+    
 ]
