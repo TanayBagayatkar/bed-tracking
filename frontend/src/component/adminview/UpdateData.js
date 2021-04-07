@@ -22,9 +22,9 @@ class UpdateData extends Component {
       vacant: null,
       special: null,
       lastupdated: null,
-      new_occupied: '',
-      new_special: '',
-      new_total: '',
+      new_occupied: "",
+      new_special: "",
+      new_total: "",
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,10 +44,31 @@ class UpdateData extends Component {
 
   handleSubmit(event) {
     // alert('New occupied  was submitted: ' + this.state.new_occupied);
-    console.log(this.state.new_occupied);
-    console.log(this.state.new_special);
-    console.log(this.state.new_total);
-
+    let id = this.props.id;
+    let token = this.props.token;
+    if (
+      this.state.new_occupied ||
+      this.state.new_occupied ||
+      this.state.new_total
+    ) {
+      console.log(this.state.new_occupied);
+      console.log(this.state.new_special);
+      console.log(this.state.new_total);
+      console.log(id,token);
+      axios.put(`http://127.0.0.1:8000/api/hospitals/${id - 1}/update-bed-info/`,{
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then(
+        //inta try kiya mai put ka idea nai kaise karte
+        
+        console.log('data updation started....')
+      )
+      .catch(
+        console.log('Error in updating')
+      )
+    }
 
     event.preventDefault();
   }
@@ -55,9 +76,9 @@ class UpdateData extends Component {
   componentDidMount() {
     let data;
     let token = this.props.token;
-    let id=this.props.id;
+    let id = this.props.id;
     axios
-      .get(`http://127.0.0.1:8000/api/hospitals/${id-1}/update-bed-info/`, {
+      .get(`http://127.0.0.1:8000/api/hospitals/${id - 1}/update-bed-info/`, {
         headers: {
           Authorization: "Token " + token,
         },
@@ -154,8 +175,7 @@ class UpdateData extends Component {
             <Col>
               <Button variant="primary" type="submit">
                 Update
-              </Button>
-              {' '}
+              </Button>{" "}
               <Button variant="primary" type="submit" onClick={this.logout}>
                 Logout
               </Button>
@@ -169,8 +189,8 @@ class UpdateData extends Component {
 const mapStateToProps = (state) => {
   return {
     token: state.token,
-    un:state.username,
-    id:state.customer_id,
+    un: state.username,
+    id: state.customer_id,
   };
 };
 
