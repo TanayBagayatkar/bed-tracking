@@ -69,7 +69,8 @@ class HospitalBedInfoSerializer(serializers.ModelSerializer):
             'id',
             'total_bed_capacity', 
             'current_bed_capacity', 
-            'speciality_beds'
+            'speciality_beds',
+            'last_updated',
         ]
 
     def update(self, instance, validated_data):

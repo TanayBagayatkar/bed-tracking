@@ -11,7 +11,7 @@ class HospitalData extends Component {
     occupied: null,
     vacant: null,
     special: null,
-    lastupdated: null,
+    last_updated: null,
   };
 
   componentDidMount() {
@@ -21,7 +21,7 @@ class HospitalData extends Component {
     let token = this.props.token;
     
     axios
-      .get(`http://127.0.0.1:8000/api/hospitals/${id-1}/update-bed-info/`, {
+      .get(`http://127.0.0.1:8000/api/hospitals/${id}/update-bed-info/`, {
         headers: {
           Authorization: "Token " + token,
         },
@@ -29,13 +29,49 @@ class HospitalData extends Component {
       .then((res) => {
         data = res.data;
         this.setState({ total: data.total_bed_capacity });
-        this.setState({ occupied: data.current_bed_capacity });
         let vacant = this.state.total - this.state.occupied;
+        this.setState({ occupied: data.current_bed_capacity });
         this.setState({ vacant: vacant });
         this.setState({ special: data.speciality_beds.length });
-        // this.setState({ lastupdated: data.speciality_beds[1].last_updated });
+        this.setState({last_updated: data.last_updated});
         // console.log("cust_id:",this.props.id);
       });
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.to_update);
+    if (this.props.to_update){
+      let data;
+      let id=this.props.id;
+  
+      let token = this.props.token;
+      
+      axios
+        .get(`http://127.0.0.1:8000/api/hospitals/${id}/update-bed-info/`, {
+          headers: {
+            Authorization: "Token " + token,
+          },
+        })
+        .then((res) => {
+          data = res.data;
+          this.setState({ total: data.total_bed_capacity });
+          this.setState({ occupied: data.current_bed_capacity });
+          let vacant = this.state.total - this.state.occupied;
+          this.setState({ vacant: vacant });
+          this.setState({ special: data.speciality_beds.length });
+          this.setState({
+            last_updated: new Date(
+                data.last_updated.split("T").join(" ")
+              ).toLocaleString(),
+          });
+          // console.log("cust_id:",this.props.id);
+        })
+        .catch(err => {
+          console.log('Error in updating');
+        });
+      this.props.changeToUpdate();
+    }
+
   }
 
   render() {
@@ -58,7 +94,7 @@ class HospitalData extends Component {
             {this.props.un}
           </Card.Header>
           <Card.Body>
-            <Card.Title>Last updated: {this.state.lastupdated}</Card.Title>
+            <Card.Title>Last updated: {this.state.last_updated}</Card.Title>
             <Card.Text>If updates are not visible contact developers</Card.Text>
             <Button variant="light">
               <a style={{ textDecoration: "none" }} href="tel:1234567890">

@@ -9,6 +9,7 @@ import {
   Form,
 } from "react-bootstrap";
 import axios from "axios";
+import { CircularProgress } from "@material-ui/core";
 
 import * as actions from "../../store/actions/auth";
 import { connect } from "react-redux";
@@ -21,10 +22,12 @@ class UpdateData extends Component {
       occupied: null,
       vacant: null,
       special: null,
-      lastupdated: null,
+      last_updated: "",
       new_occupied: "",
       new_special: "",
       new_total: "",
+      speciality_beds: null,
+      loading: false,
     };
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -55,19 +58,42 @@ class UpdateData extends Component {
       console.log(this.state.new_special);
       console.log(this.state.new_total);
       console.log(id,token);
-      axios.put(`http://127.0.0.1:8000/api/hospitals/${id - 1}/update-bed-info/`,{
+      this.setState({
+        new_occupied: "",
+        new_special: "",
+        new_total: "",
+        loading: true,
+      });
+      axios.put(`http://127.0.0.1:8000/api/hospitals/${id}/update-bed-info/`,{
+        id: id,
+        total_bed_capacity: this.state.new_total ? this.state.new_total : this.state.total,
+        current_bed_capacity: this.state.new_occupied ? this.state.new_occupied : this.state.occupied,
+        speciality_beds: this.state.speciality_beds,
+        last_updated: this.state.last_updated,
+      },{
         headers: {
           Authorization: "Token " + token,
         },
       })
-      .then(
-        //inta try kiya mai put ka idea nai kaise karte
-        
-        console.log('data updation started....')
-      )
-      .catch(
-        console.log('Error in updating')
-      )
+      .then( response => {
+        console.log(response)
+        console.log('data updation done');
+        let data = response.data;
+        this.setState({ total: data.total_bed_capacity });
+        this.setState({ occupied: data.current_bed_capacity });
+        let vacant = this.state.total - this.state.occupied;
+        this.setState({ vacant: vacant });
+        this.setState({ special: data.speciality_beds.length });
+        this.setState({speciality_beds: data.speciality_beds});
+        this.setState({last_updated: data.last_updated});
+        this.props.changeToUpdate();
+      })
+      .catch(err => {
+        console.log('Error in updating');
+      })
+      .finally(() => {
+        this.setState({loading: false});
+      })
     }
 
     event.preventDefault();
@@ -78,7 +104,7 @@ class UpdateData extends Component {
     let token = this.props.token;
     let id = this.props.id;
     axios
-      .get(`http://127.0.0.1:8000/api/hospitals/${id - 1}/update-bed-info/`, {
+      .get(`http://127.0.0.1:8000/api/hospitals/${id}/update-bed-info/`, {
         headers: {
           Authorization: "Token " + token,
         },
@@ -90,12 +116,13 @@ class UpdateData extends Component {
         let vacant = this.state.total - this.state.occupied;
         this.setState({ vacant: vacant });
         this.setState({ special: data.speciality_beds.length });
+        this.setState({speciality_beds: data.speciality_beds});
         // this.setState({lastupdated: data.speciality_beds[1].last_updated})
         // console.log(this.state.lastupdated);
       });
   }
   render() {
-    return (
+    return this.state.loading ? <CircularProgress /> : (
       <div className="updatedata">
         <Form onSubmit={this.handleSubmit}>
           <Row style={{ padding: "10px 10px 0 0" }}>

@@ -78,8 +78,8 @@ export const authLogin = (username, password) => {
         console.log(response.data);
         const token = response.data.token;
         const expirationDate = new Date(new Date().getTime() + 3600 * 1000);
-        const customer_id = response.data.hospital_admin.user;
-
+        const customer_id = response.data.hospital_admin.hospital;
+        // const hospital_ud = response.data.hospital_admin.hospital;
         localStorage.setItem("token", token);
 
         localStorage.setItem("username", username);
