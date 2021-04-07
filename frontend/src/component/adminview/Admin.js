@@ -1,10 +1,32 @@
-import React, {  useState } from "react";
-import Signin from "../signin";
+import React from "react";
 import AdminView from "./AdminView";
 
-function Admin() {
-  const [isUser, setisUser] = useState(true);
-  return <div>{isUser ? <AdminView /> : <Signin />}</div>;
+import { connect } from "react-redux";
+
+
+import  { Component } from 'react';
+import { Redirect } from "react-router-dom";
+
+class Admin extends Component {
+
+  render() {
+    return (
+      this.props.isAuthenticated ? 
+      <div>
+        <AdminView/>
+      </div>
+      :
+      <Redirect to='/login'/>
+    );
+  }
 }
 
-export default Admin;
+// export default Admin;
+
+const mapStateToProps = state => {
+	return {
+		isAuthenticated: state.token !== null,
+	};
+};
+
+export default connect(mapStateToProps)(Admin);

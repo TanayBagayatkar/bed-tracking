@@ -1,98 +1,184 @@
+import React, { Component } from "react";
+import {
+  Row,
+  Col,
+  InputGroup,
+  FormControl,
+  FormLabel,
+  Button,
+  Form,
+} from "react-bootstrap";
+import axios from "axios";
 
-import React from 'react';
-import { Row, Col, InputGroup, FormControl, FormLabel, Button} from 'react-bootstrap';
-import * as hospi from '../../data/data.json';
+import * as actions from "../../store/actions/auth";
+import { connect } from "react-redux";
 
-function UpdateData(props) {
+class UpdateData extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      total: null,
+      occupied: null,
+      vacant: null,
+      special: null,
+      lastupdated: null,
+      new_occupied: '',
+      new_special: '',
+      new_total: '',
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  logout = () => {
+    this.props.logout(this.props.token);
+  };
+
+  handleInputChange(event) {
+    const target = event.target;
+    const name = target.name;
+    this.setState({ [name]: event.target.value });
+    // this.setState({new_special: event.target.value});
+    // this.setState({new_total: event.target.value});
+  }
+
+  handleSubmit(event) {
+    // alert('New occupied  was submitted: ' + this.state.new_occupied);
+    console.log(this.state.new_occupied);
+    console.log(this.state.new_special);
+    console.log(this.state.new_total);
+
+
+    event.preventDefault();
+  }
+
+  componentDidMount() {
+    let data;
+    let token = this.props.token;
+    let id=this.props.id;
+    axios
+      .get(`http://127.0.0.1:8000/api/hospitals/${id-1}/update-bed-info/`, {
+        headers: {
+          Authorization: "Token " + token,
+        },
+      })
+      .then((res) => {
+        data = res.data;
+        this.setState({ total: data.total_bed_capacity });
+        this.setState({ occupied: data.current_bed_capacity });
+        let vacant = this.state.total - this.state.occupied;
+        this.setState({ vacant: vacant });
+        this.setState({ special: data.speciality_beds.length });
+        // this.setState({lastupdated: data.speciality_beds[1].last_updated})
+        // console.log(this.state.lastupdated);
+      });
+  }
+  render() {
     return (
-        <div className="updatedata">
-        <Row  style={{ padding: '10px 10px 0 0' }}>
-            <Col lg={2} sm={12} >
-                <FormLabel><h5>Occupied</h5></FormLabel>
+      <div className="updatedata">
+        <Form onSubmit={this.handleSubmit}>
+          <Row style={{ padding: "10px 10px 0 0" }}>
+            <Col lg={2} sm={12}>
+              <FormLabel>
+                <h5>Occupied</h5>
+              </FormLabel>
             </Col>
             <Col lg={10} sm={12}>
-                <InputGroup >
+              <InputGroup>
                 <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">{hospi.hospitals[1].properties.occupied_beds}</InputGroup.Text>
+                  <InputGroup.Text id="basic-addon1">
+                    {this.state.occupied}
+                  </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                placeholder="Change number of occupied beds"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
+                  placeholder="Change number of occupied beds"
+                  aria-label="Username"
+                  aria-describedby="basic-addon1"
+                  name="new_occupied"
+                  value={this.state.new_occupied}
+                  onChange={this.handleInputChange}
                 />
-                </InputGroup>
+              </InputGroup>
             </Col>
-
-        </Row>
-        <Row  style={{ padding: '10px 10px 0 0' }}>
-            <Col lg={2} sm={12} >
-                <FormLabel><h5>Special</h5></FormLabel>
+          </Row>
+          <Row style={{ padding: "10px 10px 0 0" }}>
+            <Col lg={2} sm={12}>
+              <FormLabel>
+                <h5>Special</h5>
+              </FormLabel>
             </Col>
             <Col lg={10} sm={12}>
-                <InputGroup >
+              <InputGroup>
                 <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">{hospi.hospitals[1].properties.occupied_beds}</InputGroup.Text>
+                  <InputGroup.Text id="basic-addon1">
+                    {this.state.special}
+                  </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                placeholder="Change number of special beds"
-                aria-label="special"
-                aria-describedby="basic-addon1"
+                  placeholder="Change number of special beds"
+                  aria-label="special"
+                  aria-describedby="basic-addon1"
+                  name="new_special"
+                  value={this.state.new_special}
+                  onChange={this.handleInputChange}
                 />
-                </InputGroup>
+              </InputGroup>
             </Col>
+          </Row>
 
-        </Row>
-        <Row  style={{ padding: '10px 10px 0 0' }}>
-            <Col lg={2} sm={12} >
-                <FormLabel><h5>Vacant</h5></FormLabel>
+          <Row style={{ padding: "10px 10px 0 0" }}>
+            <Col lg={2} sm={12}>
+              <FormLabel>
+                <h5>Total</h5>
+              </FormLabel>
             </Col>
             <Col lg={10} sm={12}>
-                <InputGroup >
+              <InputGroup>
                 <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">{hospi.hospitals[1].properties.vacant_beds}</InputGroup.Text>
+                  <InputGroup.Text id="basic-addon1">
+                    {this.state.total}
+                  </InputGroup.Text>
                 </InputGroup.Prepend>
                 <FormControl
-                placeholder="Change number of vacant beds"
-                aria-label="vacant"
-                aria-describedby="basic-addon1"
+                  placeholder="Change number of total beds"
+                  aria-label="total"
+                  aria-describedby="basic-addon1"
+                  name="new_total"
+                  value={this.state.new_total}
+                  onChange={this.handleInputChange}
                 />
-                </InputGroup>
+              </InputGroup>
             </Col>
-
-        </Row>
-        <Row  style={{ padding: '10px 10px 0 0' }}>
-            <Col lg={2} sm={12} >
-                <FormLabel><h5>Total</h5></FormLabel>
-            </Col>
-            <Col lg={10} sm={12}>
-                <InputGroup >
-                <InputGroup.Prepend>
-                <InputGroup.Text id="basic-addon1">{hospi.hospitals[1].properties.total_beds}</InputGroup.Text>
-                </InputGroup.Prepend>
-                <FormControl
-                placeholder="Change number of total beds"
-                aria-label="total"
-                aria-describedby="basic-addon1"
-                />
-                </InputGroup>
-            </Col>
-
-        </Row>
-        <Row>
+          </Row>
+          <Row>
             <Col>
-                <Button variant="primary" type="submit">
-                    Update
-                </Button>
+              <Button variant="primary" type="submit">
+                Update
+              </Button>
+              {' '}
+              <Button variant="primary" type="submit" onClick={this.logout}>
+                Logout
+              </Button>
             </Col>
-        </Row>
-        </div>
-            
-       
-     
-        
-
-     
+          </Row>
+        </Form>
+      </div>
     );
+  }
 }
+const mapStateToProps = (state) => {
+  return {
+    token: state.token,
+    un:state.username,
+    id:state.customer_id,
+  };
+};
 
-export default UpdateData ;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: (token) => dispatch(actions.authLogout(token)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(UpdateData);
+// export default UpdateData;

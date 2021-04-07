@@ -51,6 +51,8 @@ class HospitalSpecialityBed(models.Model):
     speciality_bed = models.ForeignKey(
         to=SpecialityBed, 
         on_delete=models.CASCADE,
+        blank=True,null=True
+        
     )
     total_bed_capacity = models.IntegerField()
     current_bed_capacity = models.IntegerField()
