@@ -16,9 +16,14 @@ function MapMarker(props) {
   const [occupied, setOccupied] = useState(null);
   const [vacant, setVacant] = useState(null);
   const [special, setSpecial] = useState(null);
+  
+  
+  
 
   const [total_beds, settotal_beds] = useState(null);
   let data;
+ 
+
   const handleChange = (id) => {
     // console.log(id);
     axios
@@ -26,15 +31,31 @@ function MapMarker(props) {
       .then((res) => {
         data = res.data;
         console.log(data);
+        
+       
         // console.log(data.total_bed_capacity);
         setName(data.name);
-        setLastupdated(data.last_updated);
+        const lastupd = new Date(
+          data.last_updated.split("T").join(" ")
+        ).toLocaleString();
+        // console.log(lastupd);
+        setLastupdated(lastupd);
         setOccupied(data.current_bed_capacity);
         let vaca =
           Number(data.total_bed_capacity) - Number(data.current_bed_capacity);
         setVacant(vaca);
         settotal_beds(data.total_bed_capacity);
-        setSpecial(data.speciality_beds.length);
+        const n = data.speciality_beds.length;
+        // console.log(n);
+        var ls= [];
+        var spec_total=0;
+        for(var i=0;i<n;i++){
+          ls.push(data.speciality_beds[i].total_bed_capacity);
+          spec_total += Number(data.speciality_beds[i].total_bed_capacity);
+
+        }
+        // console.log(spec_total);
+        setSpecial(spec_total);
       })
       .catch((err) => {});
   };
@@ -61,23 +82,7 @@ function MapMarker(props) {
           </button>
         </Marker>
       ))}
-      {/* <Marker
-      key={hospi.hospitals[1].properties._id}
-      latitude={hospi.hospitals[1].geometry.coordinates[0]}
-      longitude={hospi.hospitals[1].geometry.coordinates[1]}
-      >
-          <button
-            className="marker-btn"
-            onClick={(e) => {
-              e.preventDefault();
-              setSelectedHospi(hospi.hospitals[1]);
-            }}
-          >
-            <img src="/logo.png" alt="hospital icon" />
-          </button>
-          
-
-      </Marker> */}
+      
       {selectedHospi ? (
         <Popup
           latitude={selectedHospi.geometry.coordinates[0]}
@@ -96,7 +101,7 @@ function MapMarker(props) {
                   variant="outline-primary"
                   style={{ right: "0", padding: "5px", float: "right" }}
                 >
-                  <a href={"tel:" + { ...selectedHospi.properties.contact }}>
+                  <a href="tel:9912345678" >
                     <Telephone />
                   </a>
                 </Button>

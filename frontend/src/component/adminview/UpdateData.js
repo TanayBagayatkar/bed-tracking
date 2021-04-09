@@ -149,7 +149,7 @@ class UpdateData extends Component {
               </InputGroup>
             </Col>
           </Row>
-          <Row style={{ padding: "10px 10px 0 0" }}>
+          {/* <Row style={{ padding: "10px 10px 0 0" }}>
             <Col lg={2} sm={12}>
               <FormLabel>
                 <h5>Special</h5>
@@ -172,7 +172,7 @@ class UpdateData extends Component {
                 />
               </InputGroup>
             </Col>
-          </Row>
+          </Row> */}
 
           <Row style={{ padding: "10px 10px 0 0" }}>
             <Col lg={2} sm={12}>

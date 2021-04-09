@@ -18,6 +18,7 @@ class HospitalData extends Component {
     let data;
     let id=this.props.id;
 
+
     let token = this.props.token;
     
     axios
@@ -32,8 +33,17 @@ class HospitalData extends Component {
         let vacant = this.state.total - this.state.occupied;
         this.setState({ occupied: data.current_bed_capacity });
         this.setState({ vacant: vacant });
-        this.setState({ special: data.speciality_beds.length });
-        this.setState({last_updated: data.last_updated});
+        var spec_total=0;
+        const n = data.speciality_beds.length;
+        for(var i=0;i<n;i++){
+          // ls.push(data.speciality_beds[i].total_bed_capacity);
+          spec_total += Number(data.speciality_beds[i].total_bed_capacity);
+
+        }
+        this.setState({ special: spec_total });
+        this.setState({last_updated: new Date(
+          data.last_updated.split("T").join(" ")
+        ).toLocaleString(),});
         // console.log("cust_id:",this.props.id);
       });
   }
