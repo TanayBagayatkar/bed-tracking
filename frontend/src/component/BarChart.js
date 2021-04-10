@@ -9,8 +9,8 @@ function BarChart(props) {
     labels: ["Occupied", "Vacant", "Others"],
     datasets: [
       {
-        // data: [occupied_sum,vacant_sum,occupied_sum+50],
-        data: [250, 452, 43],
+        
+        data: [ 954,1252, 298],
         backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },

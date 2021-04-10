@@ -9,7 +9,6 @@ charts(FusionCharts);
 const dataSource = {
   chart: {
     caption: "Types of Beds",
-    subcaption: "month: March",
     pyaxisname: "No. of Beds",
     theme: "fusion",
     showsecondarylimits: "0",
@@ -21,27 +20,27 @@ const dataSource = {
   data: [
     {
       label: "Dialysis",
-      value: "56"
+      value: "64"
     },
     {
       label: "ICU",
-      value: "36"
+      value: "452"
     },
     {
       label: "Covid-19",
-      value: "195"
+      value: "504"
     },
     {
       label: "Ventilators",
-      value: "250"
+      value: "346"
     },
     {
       label: "Non-Covid",
-      value: "140"
+      value: "788"
     },
     {
       label: "Others",
-      value: "68"
+      value: "344"
     }
   ]
 };
