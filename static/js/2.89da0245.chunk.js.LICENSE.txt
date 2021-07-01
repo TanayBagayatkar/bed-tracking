@@ -1,0 +1,127 @@
+/*
+object-assign
+(c) Sindre Sorhus
+@license MIT
+*/
+
+/*!
+       * The buffer module from node.js, for the browser.
+       *
+       * @author   Feross Aboukhadijeh <http://feross.org>
+       * @license  MIT
+       */
+
+/*!
+  Copyright (c) 2017 Jed Watson.
+  Licensed under the MIT License (MIT), see
+  http://jedwatson.github.io/classnames
+*/
+
+/*!
+ * Chart.js v2.9.4
+ * https://www.chartjs.org
+ * (c) 2020 Chart.js Contributors
+ * Released under the MIT License
+ */
+
+/*!
+ * is-plain-object <https://github.com/jonschlinkert/is-plain-object>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+/*!
+ * isobject <https://github.com/jonschlinkert/isobject>
+ *
+ * Copyright (c) 2014-2017, Jon Schlinkert.
+ * Released under the MIT License.
+ */
+
+/*! Hammer.JS - v2.0.7 - 2016-04-22
+ * http://hammerjs.github.io/
+ *
+ * Copyright (c) 2016 Jorik Tangelder;
+ * Licensed under the MIT license */
+
+/*! dontAppend && */
+
+/**
+ * CSS Vendor prefix detection and property feature testing.
+ *
+ * @copyright Oleg Slobodskoi 2015
+ * @website https://github.com/jsstyles/css-vendor
+ * @license MIT
+ */
+
+/** !
+     * @license FusionCharts JavaScript Library
+     * Copyright FusionCharts, Inc.
+     * License Information at <http://www.fusioncharts.com/license>
+     */
+
+/** !
+     * @license FusionCharts JavaScript Library - KDtree
+     * Copyright FusionCharts, Inc.
+     * License Information at <http://www.fusioncharts.com/license>
+     *
+     * @version //? write(JSON.parse(require('fs').readFileSync('./package.json')).version);
+     */
+
+/** @license React v0.20.2
+ * scheduler.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v16.13.1
+ * react-is.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-dom.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react-jsx-runtime.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/** @license React v17.0.2
+ * react.production.min.js
+ *
+ * Copyright (c) Facebook, Inc. and its affiliates.
+ *
+ * This source code is licensed under the MIT license found in the
+ * LICENSE file in the root directory of this source tree.
+ */
+
+/**!
+* @license FusionCharts JavaScript Library
+* Copyright FusionCharts, Inc.
+* License Information at <http://www.fusioncharts.com/license>
+*
+* @version 3.16.0
+*
+* @attributions (infers respective third-party copyrights)
+* Raphael 2.1.0 (modified as 'Red Raphael') <http://raphaeljs.com/license.html>
+* JSON v2 <http://www.JSON.org/js.html>
+* Firebug Lite 1.3.0 <http://getfirebug.com/firebuglite>
+*/

@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/bed-tracking/static/css/main.3a64ed3a.chunk.css",
+    "main.js": "/bed-tracking/static/js/main.ae7c6221.chunk.js",
+    "main.js.map": "/bed-tracking/static/js/main.ae7c6221.chunk.js.map",
+    "runtime-main.js": "/bed-tracking/static/js/runtime-main.020c7096.js",
+    "runtime-main.js.map": "/bed-tracking/static/js/runtime-main.020c7096.js.map",
+    "static/css/2.4c97ca4f.chunk.css": "/bed-tracking/static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.89da0245.chunk.js": "/bed-tracking/static/js/2.89da0245.chunk.js",
+    "static/js/2.89da0245.chunk.js.map": "/bed-tracking/static/js/2.89da0245.chunk.js.map",
+    "index.html": "/bed-tracking/index.html",
+    "static/css/2.4c97ca4f.chunk.css.map": "/bed-tracking/static/css/2.4c97ca4f.chunk.css.map",
+    "static/css/main.3a64ed3a.chunk.css.map": "/bed-tracking/static/css/main.3a64ed3a.chunk.css.map",
+    "static/js/2.89da0245.chunk.js.LICENSE.txt": "/bed-tracking/static/js/2.89da0245.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.020c7096.js",
+    "static/css/2.4c97ca4f.chunk.css",
+    "static/js/2.89da0245.chunk.js",
+    "static/css/main.3a64ed3a.chunk.css",
+    "static/js/main.ae7c6221.chunk.js"
+  ]
+}
