@@ -6,23 +6,25 @@ import * as hospi from "../data/data.json";
 import Button from "react-bootstrap/Button";
 import Badge from "react-bootstrap/Badge";
 import { Card, ListGroup } from "react-bootstrap";
+
 import { Telephone } from "react-bootstrap-icons";
 import axios from "axios";
 
 function MapMarker(props) {
   const [selectedHospi, setSelectedHospi] = useState(null);
+
   const [name, setName] = useState(null);
+
   const [lastupdated, setLastupdated] = useState(null);
   const [occupied, setOccupied] = useState(null);
   const [vacant, setVacant] = useState(null);
   const [special, setSpecial] = useState(null);
-  
-  
+
   
 
   const [total_beds, settotal_beds] = useState(null);
+
   let data;
- 
 
   const handleChange = (id) => {
     // console.log(id);
@@ -31,8 +33,9 @@ function MapMarker(props) {
       .then((res) => {
         data = res.data;
         console.log(data);
-        
-       
+
+        // This is comment
+
         // console.log(data.total_bed_capacity);
         setName(data.name);
         const lastupd = new Date(
@@ -47,17 +50,16 @@ function MapMarker(props) {
         settotal_beds(data.total_bed_capacity);
         const n = data.speciality_beds.length;
         // console.log(n);
-        var ls= [];
-        var spec_total=0;
-        for(var i=0;i<n;i++){
+        var ls = [];
+        var spec_total = 0;
+        for (var i = 0; i < n; i++) {
           ls.push(data.speciality_beds[i].total_bed_capacity);
           spec_total += Number(data.speciality_beds[i].total_bed_capacity);
-
         }
         // console.log(spec_total);
         setSpecial(spec_total);
       })
-      .catch((err) => {});
+      .catch(() => {});
   };
   // console.log(total_beds);
 
@@ -82,7 +84,7 @@ function MapMarker(props) {
           </button>
         </Marker>
       ))}
-      
+
       {selectedHospi ? (
         <Popup
           latitude={selectedHospi.geometry.coordinates[0]}
@@ -101,7 +103,7 @@ function MapMarker(props) {
                   variant="outline-primary"
                   style={{ right: "0", padding: "5px", float: "right" }}
                 >
-                  <a href="tel:9912345678" >
+                  <a href="tel:9912345678">
                     <Telephone />
                   </a>
                 </Button>
